@@ -52,7 +52,12 @@ public class PostController {
 
     public void removeById(long id, HttpServletResponse response) throws IOException {
         response.setContentType(APPLICATION_JSON);
-        service.removeById(id);
-        response.getWriter().print("Content with id=" + id + " removed");
+        try {
+            service.removeById(id);
+            response.getWriter().print("Content with id=" + id + " removed");
+        } catch (NotFoundException e) {
+            response.getWriter().print("Content with id=" + id + " not found");
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
     }
 }
