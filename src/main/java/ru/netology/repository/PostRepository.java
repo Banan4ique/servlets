@@ -17,11 +17,11 @@ public class PostRepository {
   private ConcurrentHashMap<Long, Post> map = new ConcurrentHashMap<>();
 
   public List<Post> all() {
-    return map.entrySet().stream().map(Map.Entry::getValue).toList();
+    return map.values().stream().toList();
   }
 
   public Optional<Post> getById(long id) {
-    return Optional.ofNullable(map.get(id));
+      return Optional.ofNullable(map.get(id));
   }
 
   public Post save(Post post) {
